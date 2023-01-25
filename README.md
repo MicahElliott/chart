@@ -4,7 +4,7 @@ _How smelly is your code base?_
 
 This project is a set of (very simple) [recipes](bin/coveragetrack.zsh) for
 tracking the health of your code base (geared presently for Clojure but easily
-re-suited for any) in the form of a graph-rich Health Report. In comparison,
+re-suited for any) in the form of a graph-rich _Health Report_. In comparison,
 some tools (eg, [codecov](https://about.codecov.io/)) already exist to aid
 with seeing your code health in a small specific area (test coverage). But
 CHART is a collection of various metrics worth tracking with a more flexible
@@ -29,15 +29,15 @@ You'll want to have an actionable, updating report that illuminates the weak
 spots in your code base. See the **[example Health Report](example/codehealth.md)**
 _(TAKE A LOOK NOW!!)_ for a model to emulate. The Health Report can be shared
 with your team on a weekly basis to celebrate your progress (or highlight a
-problem), now that you've identified your areas for improvement.
+problem), now that you've identified some Smellables (areas for improvement).
 
 With the report in place, you're ready to explain your situation to the
 stakeholders:
 
-- Fellow devs: can start taking pride in fixing and creating healthy code
-- Product: will realize the need to allot time for tech-debt
-- Dev managers: will find peace of mind in seeing quality improve
-- CTO: can explain to company/customers that quality is quantified/prioritized
+- _Fellow devs_: can start taking pride in fixing and creating healthy code
+- _Product_: will realize the need to allot time for tech-debt
+- _Dev managers_: will find peace of mind in seeing quality improve
+- _CTO_: can explain to company/customers that quality is quantified/prioritized
 
 ## The Goal
 
@@ -46,7 +46,7 @@ stakeholders:
 You'll notice that the example report does not have a _Linting_ section.
 That's because the team has already completed their goal for a violation count
 target of zero (and configured the violations they don't care about to be
-discounted). Linting is a nice one to get to zero so that a _zero-lint policy_
+ignored). Linting is a nice one to get to zero so that a _zero-lint policy_
 can be enforced through CI.
 
 ## Process
@@ -146,3 +146,22 @@ are re-run. You can post the week's new report to a team dev channel.
 
 As of right now, the script(s) are not robust or flexible. I just hand-edit
 sections and run till all the functions I care about are called.
+
+## Ongoing enforcement
+
+Some Smellables, once reduced to zero (or for newly added code), can be
+enforced. For example, Kondo returns a non-zero exit status if it detects
+violations. Your CI can be set to reject a build if such tools are non-zero.
+This is often followed similarly with code-formatting checkers (eg,
+[cljfmt](https://github.com/weavejester/cljfmt)).
+
+You can follow that pattern with your ad hoc scripts to disallow commits that
+violate the cleanliness you seek. For example, you could write a "checker"
+that scans your whole code base (or just the files that have changed) for new
+public functions with an AWOL docstring.
+
+Other Smellables are not necessarily enforceable: if someone notices some
+smelly code that's been hanging around, it's probably not her job to fix it on
+the spot. So adding a `FIXME` or `^:deprecated` marker should be encouraged.
+However, the _use_ of a deprecated function _can_ be disallowed by a linter
+check.
