@@ -1,6 +1,6 @@
-# Code Health And Report Tooling (CHART)
+# Code Health And Reporting Tools (CHART)
 
-_How smmelly is your code base?_
+_How smelly is your code base?_
 
 This project is a set of recipes for tracking the health of your code base
 (geared presently for Clojure but suited for any) in the form of a graph-rich
@@ -23,7 +23,7 @@ Each of those becomes a section in ...
 ## The Report
 
 You'll want to have an actionable, updating report that illuminates the weak
-spots in your code base. See the [example report](./code-health.png) for a
+spots in your code base. See the **[example report](example/codehealth.md)** for a
 model to emulate. The Report can be shared with your team on a weekly basis to
 celebrate your progress (or highlight a problem), now that you've identified
 your areas for improvement.
