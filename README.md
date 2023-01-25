@@ -23,7 +23,7 @@ are up to you, but likely candidates include:
 
 Each of those (may have multiple indicators and) becomes a section in ...
 
-## The Health Report
+## ⚕️ The Health Report
 
 You'll want to have an actionable, updating report that illuminates the weak
 spots in your code base. See the **[example Health Report](example/codehealth.md)**
@@ -39,7 +39,7 @@ stakeholders:
 - _Dev managers_: will find peace of mind in seeing quality improve
 - _CTO_: can explain to company/customers that quality is quantified/prioritized
 
-## The Goal
+## 🥅 The Goal
 
 **The _Goal_ is to reduce the report down to nothing.**
 
@@ -49,7 +49,7 @@ target of zero (and configured the violations they don't care about to be
 ignored). Linting is a nice one to get to zero so that a _zero-lint policy_
 can be enforced through CI.
 
-## Process
+## 🛠️ Process
 
 It is assumed that your code is managed by `git`. This is to be able
 to do historic checkouts to establish a baseline of metrics (though the
@@ -78,7 +78,7 @@ historic baseline is optional).
 1. Create a new story for each category, with a chosen percentage improvement,
    and add to the work to the roadmap
 
-## Creating a Smellable recipe
+## 👩‍🍳Creating a Smellable recipe
 
 Some Smellables are generated from sophisticated tools (eg, cloverage,
 [clj-kondo](https://github.com/clj-kondo/clj-kondo/blob/master/doc/config.md#enable-optional-linters),
@@ -135,7 +135,7 @@ looking something like:
 
 ![FIXMEs](example/fixmes.png)
 
-## Tracking over time
+## 📅 Tracking over time
 
 To create the initial data, code is checked out at several points in time
 historically. For each checkout, analyses are run. Those analyses are
@@ -147,7 +147,7 @@ are re-run. You can post the week's new report to a team dev channel.
 As of right now, the script(s) are not robust or flexible. I just hand-edit
 sections and run till all the functions I care about are called.
 
-## Ongoing enforcement
+## 👮🏽‍♂️Ongoing enforcement
 
 Some Smellables, once reduced to zero (or for newly added code), can be
 enforced. For example, Kondo returns a non-zero exit status if it detects
@@ -165,3 +165,26 @@ smelly code that's been hanging around, it's probably not her job to fix it on
 the spot. So adding a `FIXME` or `^:deprecated` marker should be encouraged.
 However, the _use_ of a deprecated function _can_ be disallowed by a linter
 check.
+
+One of my favorite checks is enforcing that new functions are documented. The
+checker simply looks for the presence of a docstring, and rejects the commit
+or build, informing that the new function must either have a docstring, or be
+made private -- both being things that are easy to forget.
+
+## ⚠️ Caution
+
+_You're going to piss people off with this._
+
+Many coders don't like you pushing your favorite rules onto them. It is
+almost always better for your code base to have a set of rules (documentation,
+style, privatization, etc), but many won't realize they're committing
+violations until the CI checker you introduced blocks them from finishing
+their feature work. You probably want to let a manager introduce the
+importance of a new checker/enforcer before you put it into play.
+
+Some more controversial Smellables:
+
+- line length
+- spelling mistakes in docstrings
+- cyclomatic complexity (function length, etc)
+- commit message (format, length, markers, spelling)
